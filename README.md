@@ -5,31 +5,35 @@ What careers do PhD graduates have after graduation? This project analyzes priva
 This notebook has four short analytical sections:
 1. Industry outcomes by field
 2. Occupation outcomes by field
-3. Firm outcomes by field
-4. Cross-field competition for jobs (cosine similarity analysis)
-
-# Methodology
-I exclude academic appointments and focus on private sector workers. I compute cosine similarity among all academic field pairs  using industry and occupation worker distributions. Higher similarity indicates stronger competition between fields for the same types of roles.
+3. Employer outcomes by field
+4. Cross-field similarity (cosine similarity analysis)
 
 # What questions the notebook answers: 
     What percent of PhDs work in the private sector?
     Where do PhDs work at? What industries, occupations, and companies?
     Do PhDs from different fields compete against each other?
+# Methodology
+Exclude individuals with academic jobs. Calculate weighted average cosine similarity for each field. High similarity score means high level of competition with other fields.
+# Answer: 
+    30-70% of graduates work in academia. Substantial difference by field.
+    Substantial overlap in industry and occupation among graduates from different field.
+    PhD grads from different fields compete for same jobs (Many fields have high similarity scores). 
+    Companies put little emphasis on domain expertise when hiring PhD graduates. Data scientist in finance = data scientist in tech.   
+
+# Data
+Revelio Labs data provides provides firm-position level information for each individual along with ducation, occupation, and industry information. Because Revelio Labs data is proprietary, this repository **does not** contain the underlying microdata. Anyone with access to Revelio Labs data can replicate this notebook. Instead, this notebook presents **fully executed code and figures** that were run locally with licensed access.
+
+## 🔄 Pipeline Details
+### Stage 1: Sample Construction (01_prepare_revelio_data.py)
+Creates a matched sample of employees who obtained a PhD degree. Includes firm, industry, position, educational information for all PhD graduates.  
+
+### Stage 2: Dataset Preparation (02_phd_careers_analysis.ipynb)
+Generates figures and calculates cosine similarity by field.  
 
 ## Summary
-Academic retention varies dramatically (30%–70% by field).
-![Shares of Graduates in Academia by Field](figures/pct_academia_alljobs_postphd_2010.png)
-<!-- ![Shares of Graduates in Academia by Field](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/pct_academia_alljobs_postphd_2010.png) -->
+Substantial different share of graduates who remain in academia. 70+% of accounting, education, and marketing PhD graduates stay in academic or research-oriented roles. Around half remain for architecture, finance, mathematics, economics, business, and physics. In hard sciences, only 30% remain. 
 
-
-Many PhD graduates enter into healthcare, technologies, and, pharmaceuticals sectors.
-![Industry Share of Graduates](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/alljob_ex_research_postphd_industry.png)
-
-
-Cosine similarity is high for many fields, meaning that there is high cross-field competition for jobs. Companies hire for skill rather than industry knowledge.
-![Cosine similarty by Fields](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/scatter_similarity_industry_vs_occ.png)
-
-
+![Shares of Graduates in Academia by Field](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/pct_academia_alljobs_postphd_2010.png)
 
 ### By Industry
 Many graduates enter into tech, healthcare, pharmaceuticals, and finance. Tech hires from sciences, engineering, math, and business programs. Healthcare and pharmaceuticals hires from biology, chemistry, medicine. Graduates from finance, economics, and mathematics enter into finance. 
@@ -52,8 +56,8 @@ Finance: statistics, mathematics, finance.
 ### Competition among Phds from different fields
 Cosine similarity scores show that PhD graduates across fields work in similar industries and occupations and compete for same jobs.
 
-By Occupation\\
-field	weighted_cosine_similarity	n_grads	top1_field	top1_sim\\
+By Occupation
+field	weighted_cosine_similarity	n_grads	top1_field	top1_sim
 Physics	0.519783	20168	Mathematics	0.961095
 Mathematics	0.490581	12279	Physics	0.961095
 Statistics	0.354852	8682	Mathematics	0.842643
