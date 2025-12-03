@@ -1,127 +1,90 @@
 # Private-Sector Career Outcomes for PhD Graduates: Evidence from Revelio Labs Data
-What careers do PhD graduates have after graduation? This project analyzes private-sector career outcomes for PhD graduates across academic fields, using Revelio Labs’ firm-position microdata. I visualize outcomes by industry, occupation, and company. I quantify cross-field competition for jobs based on cosine similarity scores. 
+What careers do PhD graduates have after graduation? This project analyzes private-sector career outcomes for PhD graduates across academic fields, using Revelio Labs’ firm-position microdata. 
 
-# How to Read This Notebook
-This notebook has four short analytical sections:
-1. Industry outcomes by field
-2. Occupation outcomes by field
-3. Employer outcomes by field
-4. Cross-field similarity (cosine similarity analysis)
-
-# What questions the notebook answers: 
-    What percent of PhDs work in the private sector?
-    Where do PhDs work at? What industries, occupations, and companies?
-    Do PhDs from different fields compete against each other?
-# Methodology
-Exclude individuals with academic jobs. Calculate weighted average cosine similarity for each field. High similarity score means high level of competition with other fields.
-# Answer: 
-    30-70% of graduates work in academia. Substantial difference by field.
-    Substantial overlap in industry and occupation among graduates from different field.
-    PhD grads from different fields compete for same jobs (Many fields have high similarity scores). 
-    Companies put little emphasis on domain expertise when hiring PhD graduates. Data scientist in finance = data scientist in tech.   
-
-# Data
-Revelio Labs data provides provides firm-position level information for each individual along with ducation, occupation, and industry information. Because Revelio Labs data is proprietary, this repository **does not** contain the underlying microdata. Anyone with access to Revelio Labs data can replicate this notebook. Instead, this notebook presents **fully executed code and figures** that were run locally with licensed access.
-
-## 🔄 Pipeline Details
-### Stage 1: Sample Construction (01_prepare_revelio_data.py)
-Creates a matched sample of employees who obtained a PhD degree. Includes firm, industry, position, educational information for all PhD graduates.  
-
-### Stage 2: Dataset Preparation (02_phd_careers_analysis.ipynb)
-Generates figures and calculates cosine similarity by field.  
+# Motivation
+1. Shrinking Tenure-Track market
+2. PhDs lack knowledge on private sector
+3. Importance of understanding field differences
+4. Value of Revelio’s labor-flow data
 
 ## Summary
-Substantial different share of graduates who remain in academia. 70+% of accounting, education, and marketing PhD graduates stay in academic or research-oriented roles. Around half remain for architecture, finance, mathematics, economics, business, and physics. In hard sciences, only 30% remain. 
+### Finding 1 — Collapse of the Tenure-Track Pathway
+50% decline in share of PhD graduates with tenure-track positions since 2002. Hard sciences hit hardest. Universities and policymakers need to benchmark PhD program outcomes.
+![Tenure-Track Share Over Time](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/figures\pct_tt_faculty_by_graduationyear.png)
+![Tenure-Track Share Decline by Field](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/figures\figures\signed_pct_change_tt_2002_2024_by_field.png)
 
-![Shares of Graduates in Academia by Field](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/pct_academia_alljobs_postphd_2010.png)
+### Finding 2 — PhDs Cluster into a Handful of Industries & Occupations
+PhDs commonly enter Healthcare, pharma, IT, and electronics industry and commonly work as data scientists, software engineers, and machine engineers. PhDs may be competing against PhDs from different fields. 
 
-### By Industry
-Many graduates enter into tech, healthcare, pharmaceuticals, and finance. Tech hires from sciences, engineering, math, and business programs. Healthcare and pharmaceuticals hires from biology, chemistry, medicine. Graduates from finance, economics, and mathematics enter into finance. 
+![Common Industries](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/figures\figures\top10_industries_nonacademic_since2002.png)
+![Common Occupations](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/figures\figures\figures\top10_occupations_nonacademic_since2002.png)
 
-### By Occupation
-Data scientists, quantitative researchers, and software engineers comes from wide range of fields. Suggests that PhDs from different fields may compete with each other.
-Data scientist: engineering, biology, statistician, physics, mathematics, economics. 
-Quantitative analyst: physics, statistics, economics, mathematics, and finance. 
-Machine engineer and software engineers: engineering, physics, mathematics, and information technology. 
+### Finding 3 — But Fields Are Surprisingly Distinct (Low Cosine Similarity)
+Similarity score analysis reveals that most field have little occupational overlap with other fields. High similarities only in natural pairs: medicine–biology, economics–finance, physics–engineering, and math–statistics.
 
-### By Company 
-Large tech companies and government institutions hire from wide range of fields.
-Large tech companies: all fields except biology, chemistry, education, medicine, and accounting.
-Government: business, education, medicine, finance, and accounting. 
-Large pharma: biology and chemistry
-Economic consulting: economics and finance
-Semiconductor companies: engineering and physics
-Finance: statistics, mathematics, finance.
+![Occupation Similarity Heatmap](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/figures\figures\figures\figures\field_similarity_heatmap_occ.png)
 
-### Competition among Phds from different fields
-Cosine similarity scores show that PhD graduates across fields work in similar industries and occupations and compete for same jobs.
+### Finding 4 — Each Field Has Clear Employment Niches
+Instead of chasing generic roles ('data scientist'), PhDs succeed more often when they pursue occupations aligned with field specialization. Biology → medical writer, Math → actuary, Physics → data engineer. Below table display the top three occupations with most field representation. 
 
-By Occupation
-field	weighted_cosine_similarity	n_grads	top1_field	top1_sim
-Physics	0.519783	20168	Mathematics	0.961095
-Mathematics	0.490581	12279	Physics	0.961095
-Statistics	0.354852	8682	Mathematics	0.842643
-Biology	0.298329	24198	Medicine	0.600837
-Engineering	0.292028	182747	Physics	0.716104
-Information Technology	0.271463	2128	Engineering	0.355313
-Chemistry	0.24054	29309	Biology	0.437107
-Business	0.227899	44628	Education	0.706154
-Marketing	0.205864	1435	Business	0.492931
-Finance	0.174187	2642	Economics	0.931049
-Economics	0.172346	17740	Finance	0.931049
-Education	0.158096	19651	Business	0.706154
-Medicine	0.142741	3486	Biology	0.600837
-Accounting	0.095412	1105	Economics	0.663341
-Architecture	0.049174	1519	Business	0.097774
+| Field                 | Occupation                   | # Graduates from Field | # Graduates | % Graduates from Field |
+|-----------------------|------------------------------|-------------------------|-------------|--------------------------|
+| Accounting            | tax accountant               | 31                      | 155         | 0.034254                 |
+| Accounting            | accounting                   | 33                      | 360         | 0.036464                 |
+| Accounting            | financial officer            | 32                      | 685         | 0.035359                 |
+| Architecture          | project architect            | 45                      | 117         | 0.025952                 |
+| Architecture          | architect                    | 471                     | 1346        | 0.271626                 |
+| Architecture          | architecture                 | 94                      | 279         | 0.054210                 |
+| Biology               | medical writer               | 1522                    | 6431        | 0.047463                 |
+| Biology               | technical support            | 30                      | 129         | 0.000936                 |
+| Biology               | research technician          | 1679                    | 7246        | 0.052359                 |
+| Business              | finance controller           | 39                      | 65          | 0.000809                 |
+| Business              | contracts administrator      | 80                      | 138         | 0.001660                 |
+| Business              | financial accounting         | 42                      | 73          | 0.000872                 |
+| Chemistry             | research chemist             | 3954                    | 5530        | 0.099407                 |
+| Chemistry             | chemist                      | 2430                    | 3421        | 0.061092                 |
+| Chemistry             | analytical chemist           | 1783                    | 3115        | 0.044826                 |
+| Economics             | economist                    | 6356                    | 8450        | 0.264734                 |
+| Economics             | tax consultant               | 43                      | 81          | 0.001791                 |
+| Economics             | credit risk analyst          | 101                     | 289         | 0.004207                 |
+| Education             | admissions                   | 260                     | 1650        | 0.013752                 |
+| Education             | counselor                    | 1238                    | 8199        | 0.065478                 |
+| Education             | superintendent               | 218                     | 1470        | 0.011530                 |
+| Engineering           | structural engineer          | 3034                    | 3256        | 0.012640                 |
+| Engineering           | process control engineer     | 82                      | 93          | 0.000342                 |
+| Engineering           | petroleum engineer           | 591                     | 678         | 0.002462                 |
+| Finance               | capital markets              | 62                      | 418         | 0.017584                 |
+| Finance               | portfolio                    | 52                      | 393         | 0.014748                 |
+| Finance               | risk analyst                 | 32                      | 277         | 0.009075                 |
+| Information Technology | network administrator       | 40                      | 302         | 0.017490                 |
+| Information Technology | information security engineer | 51                    | 415         | 0.022300                 |
+| Information Technology | cyber security              | 37                      | 652         | 0.016178                 |
+| Marketing             | marketing research           | 44                      | 598         | 0.027604                 |
+| Marketing             | marketing consultant         | 49                      | 937         | 0.030740                 |
+| Marketing             | analytics                    | 44                      | 2358        | 0.027604                 |
+| Mathematics           | actuarial                    | 115                     | 250         | 0.007457                 |
+| Mathematics           | actuary                      | 116                     | 378         | 0.007522                 |
+| Mathematics           | quantitative analyst         | 1577                    | 8072        | 0.102257                 |
+| Medicine              | physician                    | 955                     | 14053       | 0.235512                 |
+| Medicine              | medical                      | 277                     | 5362        | 0.068311                 |
+| Medicine              | physical therapist           | 119                     | 2378        | 0.029346                 |
+| Physics               | devops engineer              | 39                      | 261         | 0.001488                 |
+| Physics               | data engineer                | 296                     | 2008        | 0.011296                 |
+| Physics               | quantitative analyst         | 1171                    | 8072        | 0.044690                 |
+| Statistics            | statistical programmer       | 400                     | 1512        | 0.038175                 |
+| Statistics            | statistician                 | 2022                    | 8149        | 0.192976                 |
+| Statistics            | quantitative analyst         | 904                     | 8072        | 0.086276                 |
 
-### No distinction for domain expertise
-Industry-occupation score is similar to occupation score in most fields. Companies recruit based on skill sets rather than domain expertise, effectively treating a data scientist in finance as identical to one in tech.
+### What This Means (for PhDs, universities, employers)
+Employers do not view PhDs homogenously and each field has a distinct comparative advantage. By targetting field-specific roles, job seekers have a better chance of employment. Universities and policymakers need to inform which occupations best align with field.
 
-| Field                   | Weighted Cosine Similarity | n_grads | Top 1 Field | Top 1 Sim |
-|------------------------|-----------------------------|---------|-------------|-----------|
-| Physics                | 0.527093                    | 17,930  | Mathematics | 0.89047   |
-| Mathematics            | 0.456673                    | 10,988  | Physics     | 0.89047   |
-| Statistics             | 0.295609                    | 7,931   | Mathematics | 0.762719  |
-| Engineering            | 0.283001                    | 161,056 | Physics     | 0.692458  |
-| Information Technology | 0.246712                    | 1,656   | Engineering | 0.347083  |
-| Chemistry              | 0.244420                    | 25,379  | Biology     | 0.398051  |
-| Biology                | 0.225077                    | 19,860  | Medicine    | 0.683894  |
-| Business               | 0.197213                    | 30,333  | Education   | 0.687775  |
-| Finance                | 0.165963                    | 1,832   | Economics   | 0.727996  |
-| Medicine               | 0.136125                    | 2,542   | Biology     | 0.683894  |
-| Marketing              | 0.130945                    | 794     | Statistics  | 0.255651  |
-| Economics              | 0.129540                    | 14,793  | Finance     | 0.727996  |
-| Education              | 0.119081                    | 9,222   | Business    | 0.687775  |
-| Accounting             | 0.065175                    | 501     | Finance     | 0.242085  |
-| Architecture           | 0.030274                    | 986     | Business    | 0.041195  |
+# Data
+Revelio Labs data provides provides firm-position level information for each individual along with education, occupation, and industry information. This repository **does not** contain the underlying data. Anyone with access to Revelio Labs data can replicate this notebook. 
 
-### Same holds within firm. 
-Firm-occupation similarity score also very similar. PhDs from different fields also compete for same roles in same firms  
-
-field	weighted_cosine_similarity	n_grads	top1_field	top1_sim
-Physics	0.498651	18975	Engineering	0.71449
-Mathematics	0.472483	11574	Engineering	0.714003
-Engineering	0.267058	171707	Physics	0.71449
-Chemistry	0.257456	26989	Physics	0.410661
-Biology	0.211622	21095	Medicine	0.340396
-Statistics	0.18474	8134	Mathematics	0.451837
-Education	0.157952	12417	Business	0.70963
-Business	0.151663	38092	Education	0.70963
-Information Technology	0.144056	1850	Business	0.230698
-Finance	0.13209	2152	Economics	0.456313
-Marketing	0.118584	1003	Business	0.379264
-Accounting	0.106648	628	Business	0.419981
-Medicine	0.101933	2952	Education	0.364667
-Economics	0.073622	16019	Finance	0.456313
-Architecture	0.051428	1206	Business	0.129098
-
-
-
-# Answer: 
-    30-70% of graduates work in academia. Substantial difference by field.
-    Substantial overlap in industry and occupation among graduates from different field.
-    PhD grads from different fields compete for same jobs (Many fields have high similarity scores). 
-    Companies put little emphasis on domain expertise when hiring PhD graduates. Data scientist in finance = data scientist in tech.   
+# Methodology
+1. Data filtering: Exclude academic employers from sample.
+2. Similarity score: Cosine similarity between occupation weights for each field pair excluding itself.
+3. Comparative advantage: # of graduates from field in occupation / # of graduates in occupation.
 
 ## 🔄 Pipeline Details
 ### Stage 1: Sample Construction (01_prepare_revelio_data.py)
@@ -129,4 +92,3 @@ Creates a matched sample of employees who obtained a PhD degree. Includes firm, 
 
 ### Stage 2: Dataset Preparation (02_phd_careers_analysis.ipynb)
 Generates figures and calculates cosine similarity by field.  
-
