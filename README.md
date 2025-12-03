@@ -10,19 +10,19 @@ What careers do PhD graduates have after graduation? This project analyzes priva
 ## Summary
 ### Finding 1 — Collapse of the Tenure-Track Pathway
 50% decline in share of PhD graduates with tenure-track positions since 2002. Hard sciences hit hardest. Universities and policymakers need to benchmark PhD program outcomes.
-![Tenure-Track Share Over Time](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/figures\pct_tt_faculty_by_graduationyear.png)
-![Tenure-Track Share Decline by Field](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/figures\figures\signed_pct_change_tt_2002_2024_by_field.png)
+![Tenure-Track Share Over Time](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/pct_tt_faculty_by_graduationyear.png)
+![Tenure-Track Share Decline by Field](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/signed_pct_change_tt_2002_2024_by_field.png)
 
 ### Finding 2 — PhDs Cluster into a Handful of Industries & Occupations
 PhDs commonly enter Healthcare, pharma, IT, and electronics industry and commonly work as data scientists, software engineers, and machine engineers. PhDs may be competing against PhDs from different fields. 
 
-![Common Industries](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/figures\figures\top10_industries_nonacademic_since2002.png)
-![Common Occupations](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/figures\figures\figures\top10_occupations_nonacademic_since2002.png)
+![Common Industries](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/top10_industries_nonacademic_since2002.png)
+![Common Occupations](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/top10_occupations_nonacademic_since2002.png)
 
 ### Finding 3 — But Fields Are Surprisingly Distinct (Low Cosine Similarity)
 Similarity score analysis reveals that most field have little occupational overlap with other fields. High similarities only in natural pairs: medicine–biology, economics–finance, physics–engineering, and math–statistics.
 
-![Occupation Similarity Heatmap](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/figures\figures\figures\figures\field_similarity_heatmap_occ.png)
+![Occupation Similarity Heatmap](https://github.com/elliotoh424/Doctorate-Career-Trajectory/blob/main/figures/field_similarity_heatmap_occ.png)
 
 ### Finding 4 — Each Field Has Clear Employment Niches
 Instead of chasing generic roles ('data scientist'), PhDs succeed more often when they pursue occupations aligned with field specialization. Biology → medical writer, Math → actuary, Physics → data engineer. Below table display the top three occupations with most field representation. 
