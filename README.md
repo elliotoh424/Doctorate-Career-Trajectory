@@ -1,5 +1,5 @@
-# The PhD Job Market in Industry: A Data-Driven Analysis Using Revelio Data
-This project analyses the private-sector career trajectory and competitive landscape for PhD graduates.
+# Private-Sector Career Outcomes for PhD Graduates: Evidence from Revelio Labs Data
+What careers do PhD graduates have after graduation? This project analyzes private-sector career outcomes for PhD graduates across academic fields, using Revelio Labs’ firm-position microdata. I visualize outcomes by industry, occupation, and company. I quantify cross-field competition for jobs based on cosine similarity scores. 
 
 # How to Read This Notebook
 This notebook has four short analytical sections:
@@ -77,22 +77,23 @@ Architecture	0.049174	1519	Business	0.097774
 ### No distinction for domain expertise
 Industry-occupation score is similar to occupation score in most fields. Companies recruit based on skill sets rather than domain expertise, effectively treating a data scientist in finance as identical to one in tech.
 
-field	weighted_cosine_similarity	n_grads	top1_field	top1_sim
-Physics	0.527093	17930	Mathematics	0.89047
-Mathematics	0.456673	10988	Physics	0.89047
-Statistics	0.295609	7931	Mathematics	0.762719
-Engineering	0.283001	161056	Physics	0.692458
-Information Technology	0.246712	1656	Engineering	0.347083
-Chemistry	0.24442	25379	Biology	0.398051
-Biology	0.225077	19860	Medicine	0.683894
-Business	0.197213	30333	Education	0.687775
-Finance	0.165963	1832	Economics	0.727996
-Medicine	0.136125	2542	Biology	0.683894
-Marketing	0.130945	794	Statistics	0.255651
-Economics	0.12954	14793	Finance	0.727996
-Education	0.119081	9222	Business	0.687775
-Accounting	0.065175	501	Finance	0.242085
-Architecture	0.030274	986	Business	0.041195
+| Field                   | Weighted Cosine Similarity | n_grads | Top 1 Field | Top 1 Sim |
+|------------------------|-----------------------------|---------|-------------|-----------|
+| Physics                | 0.527093                    | 17,930  | Mathematics | 0.89047   |
+| Mathematics            | 0.456673                    | 10,988  | Physics     | 0.89047   |
+| Statistics             | 0.295609                    | 7,931   | Mathematics | 0.762719  |
+| Engineering            | 0.283001                    | 161,056 | Physics     | 0.692458  |
+| Information Technology | 0.246712                    | 1,656   | Engineering | 0.347083  |
+| Chemistry              | 0.244420                    | 25,379  | Biology     | 0.398051  |
+| Biology                | 0.225077                    | 19,860  | Medicine    | 0.683894  |
+| Business               | 0.197213                    | 30,333  | Education   | 0.687775  |
+| Finance                | 0.165963                    | 1,832   | Economics   | 0.727996  |
+| Medicine               | 0.136125                    | 2,542   | Biology     | 0.683894  |
+| Marketing              | 0.130945                    | 794     | Statistics  | 0.255651  |
+| Economics              | 0.129540                    | 14,793  | Finance     | 0.727996  |
+| Education              | 0.119081                    | 9,222   | Business    | 0.687775  |
+| Accounting             | 0.065175                    | 501     | Finance     | 0.242085  |
+| Architecture           | 0.030274                    | 986     | Business    | 0.041195  |
 
 ### Same holds within firm. 
 Firm-occupation similarity score also very similar. PhDs from different fields also compete for same roles in same firms  
@@ -113,4 +114,19 @@ Accounting	0.106648	628	Business	0.419981
 Medicine	0.101933	2952	Education	0.364667
 Economics	0.073622	16019	Finance	0.456313
 Architecture	0.051428	1206	Business	0.129098
+
+
+
+# Answer: 
+    30-70% of graduates work in academia. Substantial difference by field.
+    Substantial overlap in industry and occupation among graduates from different field.
+    PhD grads from different fields compete for same jobs (Many fields have high similarity scores). 
+    Companies put little emphasis on domain expertise when hiring PhD graduates. Data scientist in finance = data scientist in tech.   
+
+## 🔄 Pipeline Details
+### Stage 1: Sample Construction (01_prepare_revelio_data.py)
+Creates a matched sample of employees who obtained a PhD degree. Includes firm, industry, position, educational information for all PhD graduates.  
+
+### Stage 2: Dataset Preparation (02_phd_careers_analysis.ipynb)
+Generates figures and calculates cosine similarity by field.  
 
